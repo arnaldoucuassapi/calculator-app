@@ -8,13 +8,14 @@ export const styles = StyleSheet.create({
         width: screenWidth,
         backgroundColor: '#2d2a37',
         paddingVertical: 54,
-        paddingHorizontal: 32
+        paddingHorizontal: 32,
+        gap: 26
     },
     expressions: {
         color: '#6b6b6b',
         fontSize: 23,
         letterSpacing: 2,
-        textAlign: 'right'
+        textAlign: 'right',
     },
     resultContainer: {
         display: 'flex',
@@ -32,6 +33,12 @@ export const styles = StyleSheet.create({
         textAlign: 'right'
     },
     main: {
-
+        flex: 1,
+        justifyContent: 'center',
+        gap: 20,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 });

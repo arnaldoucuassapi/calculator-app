@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import { styles } from './styles';
+import { Button } from './components/Button';
 
 export default function App() {
   return (
@@ -14,7 +15,40 @@ export default function App() {
       </View>
       
       <View style={styles.main}>
-
+        <View style={styles.row}>
+          <Button title='CE' type='function' />
+          <Button title='C' type='function'/>
+          <Button title='%' />
+          <Button title='%' type='operation' />
+        </View>
+        
+        <View style={styles.row}>
+          <Button title='7' />
+          <Button title='8' />
+          <Button title='9' />
+          <Button title='x' type='operation' />
+        </View>
+        
+        <View style={styles.row}>
+          <Button title='4' />
+          <Button title='5' />
+          <Button title='6' />
+          <Button title='-' type='operation' />
+        </View>
+        
+        <View style={styles.row}>
+          <Button title='1' />
+          <Button title='2' />
+          <Button title='3' />
+          <Button title='+' type='operation' />
+        </View>
+        
+        <View style={styles.row}>
+          <Button title='|' />
+          <Button title='0' />
+          <Button title=',' />
+          <Button title='=' type='calculator' />
+        </View>
       </View>
 
       <StatusBar style="light" translucent />
