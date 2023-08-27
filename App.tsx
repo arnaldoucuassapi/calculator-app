@@ -19,7 +19,7 @@ export default function App() {
           <Button title='CE' type='function' />
           <Button title='C' type='function'/>
           <Button title='%' />
-          <Button title='%' type='operation' />
+          <Button title='÷' type='operation' />
         </View>
         
         <View style={styles.row}>
