@@ -5,9 +5,14 @@ export const styles = StyleSheet.create({
         width: 64,
         height: 64,
         borderRadius: 32,
-        borderWidth: 1,
-        borderColor: '#3c3c3c',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#1f1c25',
+        shadowColor: '#000', 
+        shadowOffset: {
+            width: 0,
+            height: -0
+        },
+        shadowOpacity: 0.1,
     },
     buttonOperation: {
         width: 64,
