@@ -15,7 +15,8 @@ enum Operations {
 export default function App() {
   const [number, setNumber] = useState<number>(0);
   const [expressions, setExpressions] = useState<string>("");
-  const [total, setTotal]= useState<number>(0) ;
+  const [total, setTotal]= useState<number>(0);
+  const [Comma, setComma] =  useState(false);
 
   const calculos = new Calculator();
 
@@ -48,14 +49,19 @@ export default function App() {
   function addNumber(x: number) {
     if (number < 999999999999) {
       if (number != 0) {
-        setNumber(state => Number(`${state}${x}`));
+        setNumber(state => Number(`${state}${Comma ? '.'+x : x}`));
       } else {
         setNumber(x);
+      }
+
+      if (Comma) {
+        setComma(false)
       }
     }
   }
 
-  function addNumberWithComma() {
+  function decimalNumber() {
+    setComma(true);
   }
 
   function clearAll() {
@@ -127,7 +133,7 @@ export default function App() {
         <View style={styles.row}>
           <Button title='|' />
           <Button title='0' onPress={() => addNumber(0)} />
-          <Button title=',' onPress={addNumberWithComma} />
+          <Button title=',' onPress={decimalNumber} />
           <Button title='=' type='calculator' onPress={showCalculation} />
         </View>
       </View>
