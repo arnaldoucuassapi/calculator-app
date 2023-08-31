@@ -61,14 +61,23 @@ export default function App() {
 
   function clearAll() {
     setExpressions('');
-    setNumber(0);
+    clearNumber();
   }
 
   function clearNumber() {
     setNumber(0);
+    setTotal(0);
   }
 
   function deleteAddedLastNumber() {
+    if (number > 0) {
+      const stringNumber = number.toString();
+      const lastNumber = stringNumber.length - 1;
+      const newNumber = Number(stringNumber.slice(0, lastNumber));
+
+      console.log(newNumber)
+      setNumber(newNumber);
+    }
   }
 
   function showCalculation() {
