@@ -3,7 +3,7 @@ import { Alert, Text, View } from 'react-native';
 import { styles } from './styles';
 import { Button } from './components/Button';
 import { useState } from 'react';
-import Calculos from './utils/calculos';
+import Calculator from './utils/calculator';
 
 enum Operations {
   Sum = '+',
@@ -17,10 +17,9 @@ export default function App() {
   const [expressions, setExpressions] = useState<string>("");
   const [total, setTotal]= useState<number>(0) ;
 
-  const calculos = new Calculos();
+  const calculos = new Calculator();
 
   function calculate(operation: string) {
-
     setExpressions(state => {
       return state ? `${state} ${number} ${operation}` : `${number} ${operation}`;
     });
@@ -42,8 +41,8 @@ export default function App() {
         setTotal(state => calculos.division(state, number));
         break;
     }
-    
-    setNumber(total);
+
+    setNumber(0);
   }
 
   function addNumber(x: number) {

@@ -1,11 +1,11 @@
-interface ICalculos {
+interface ICalculator {
     sum: (x: number, y: number) => number;
     sub: (x: number, y: number) => number;
     multiplication: (x: number, y: number) => number;
     division: (x: number, y: number) => number;
 }
 
-export default class Calculos implements ICalculos {
+export default class Calculator implements ICalculator {
     sum(x: number, y: number) {
         return x + y;
     }
