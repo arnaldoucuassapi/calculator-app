@@ -13,55 +13,60 @@ enum Operations {
 }
 
 export default function App() {
-  const [number, setNumber] = useState<number>(0);
-  const [expressions, setExpressions] = useState<string>("");
-  const [total, setTotal]= useState<number>(0);
-  const [Comma, setComma] =  useState(false);
-
-  const calculos = new Calculator();
+  const [number, setNumber] = useState(0);
+  const [total, setTotal]= useState(0);
+  const [expressions, setExpressions] = useState("");
+  const [hasComma, setHasComma] =  useState(false);
+  const [currentOperation, setCurrentOperation] =  useState("");
 
   function calculate(operation: string) {
-    setExpressions(state => {
-      return state ? `${state} ${number} ${operation}` : `${number} ${operation}`;
+    const calculator = new Calculator();
+    let calc = 0;
+
+    (number != 0) && setExpressions(state => {
+      return state ? `${state} ${operation} ${operation}` : `${number} ${operation}`;
     });
 
     switch(operation) {
       case Operations.Sum:
-        setTotal(state => calculos.sum(state, number));
+        calc = calculator.sum(total, number);
         break;
 
       case Operations.Sub:
-        setTotal(state => calculos.sub(state, number));
+        calc = calculator.sub(total, number);
         break;
 
       case Operations.Multiplication:
-        setTotal(state => calculos.multiplication(state, number));
+        calc = calculator.multiplication(total, number);
         break;
 
       case Operations.Division:
-        setTotal(state => calculos.division(state, number));
+        calc = calculator.division(total, number);
         break;
     }
 
+    console.log('T:'+calc);
+    setTotal(calc);
+    setCurrentOperation(operation);
     setNumber(0);
   }
 
   function addNumber(x: number) {
     if (number < 999999999999) {
       if (number != 0) {
-        setNumber(state => Number(`${state}${Comma ? '.'+x : x}`));
+        setNumber(state => Number(`${state}${hasComma ? '.'+x : x}`));
       } else {
         setNumber(x);
       }
 
-      if (Comma) {
-        setComma(false)
+      if (hasComma) {
+        setHasComma(false)
       }
     }
   }
 
   function decimalNumber() {
-    setComma(true);
+    setHasComma(true);
   }
 
   function clearAll() {
@@ -80,12 +85,13 @@ export default function App() {
       const lastNumber = stringNumber.length - 1;
       const newNumber = Number(stringNumber.slice(0, lastNumber));
 
-      console.log(newNumber)
       setNumber(newNumber);
     }
   }
 
   function showCalculation() {
+    console.log('show '+total)
+    calculate(currentOperation);
     clearAll();
     setNumber(total);
     setTotal(0);
@@ -94,10 +100,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.expressions}>{expressions}</Text>
+        <Text style={styles.expressions}>{number}</Text>
         <View style={styles.resultContainer}>
           <Text style={styles.equalOperator}>=</Text>
-          <Text style={styles.total}>{number}</Text>
+          <Text style={styles.total}>{total}</Text>
         </View>
       </View>
       
