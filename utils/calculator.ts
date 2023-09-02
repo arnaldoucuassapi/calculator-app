@@ -19,6 +19,6 @@ export default class Calculator implements ICalculator {
     }
 
     division(x: number, y: number) {
-        return x * y;
+        return x / y;
     }
 }
