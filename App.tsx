@@ -17,14 +17,14 @@ export default function App() {
   const [total, setTotal]= useState(0);
   const [expressions, setExpressions] = useState("");
   const [hasComma, setHasComma] =  useState(false);
-  const [currentOperation, setCurrentOperation] =  useState("");
+  const [isTotal, setIsTotal] =  useState(false);
 
   function calculate(operation: string) {
     const calculator = new Calculator();
     let calc = 0;
 
-    (number != 0) && setExpressions(state => {
-      return state ? `${state} ${operation} ${operation}` : `${number} ${operation}`;
+    setExpressions(() => {
+      return total ? `${total} ${operation}` : `${number} ${operation}`;
     });
 
     switch(operation) {
@@ -45,14 +45,16 @@ export default function App() {
         break;
     }
 
-    console.log('T:'+calc);
+    setIsTotal(false);
+    console.log('T:'+calc+' '+number+' '+total);
     setTotal(calc);
-    setCurrentOperation(operation);
     setNumber(0);
   }
 
   function addNumber(x: number) {
     if (number < 999999999999) {
+      setIsTotal(false);
+
       if (number != 0) {
         setNumber(state => Number(`${state}${hasComma ? '.'+x : x}`));
       } else {
@@ -90,20 +92,22 @@ export default function App() {
   }
 
   function showCalculation() {
-    console.log('show '+total)
-    calculate(currentOperation);
-    clearAll();
-    setNumber(total);
-    setTotal(0);
+    const lastIndexOfExpression = expressions.length - 1;
+    const operation = expressions[lastIndexOfExpression];
+    
+    calculate(operation);
+    setExpressions('');
+
+    setIsTotal(true);
   }
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.expressions}>{number}</Text>
+        <Text style={styles.expressions}>{expressions}</Text>
         <View style={styles.resultContainer}>
           <Text style={styles.equalOperator}>=</Text>
-          <Text style={styles.total}>{total}</Text>
+          <Text style={styles.total}>{isTotal ? total : number }</Text>
         </View>
       </View>
       
